@@ -149,7 +149,7 @@ function start_game(){
     }else{
         speakData.text  = "hi, "+name_input.value
         speechSynthesis.speak(speakData);
-        player_name.innerHTML = name_input.value..trim().split(" ")[0]
+        player_name.innerHTML = name_input.value.trim().split(" ")[0]
         document.getElementById('start-menu').style.display = 'none'
         document.getElementById('restart-menu').style.display = 'none'
     }

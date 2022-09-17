@@ -18,10 +18,13 @@
     height: 10vh;
     display: flex;
     justify-content: space-around;
-    font-size: 30px;
     align-items: center;
     
 } 
+
+.score{
+    margin-left: 5px;
+}
 
 .player-score{
     display: flex;
@@ -103,6 +106,9 @@
 @media screen and (max-width: 500px) {
     .guess-image{
         margin: 10%;
+    }
+    .player_name_input::placeholder{
+        font-size: 10px;
     }
 }
 
@@ -192,4 +198,3 @@
     background-color: black;
     color: aliceblue;
 }
-

@@ -77,6 +77,9 @@
     <script>
         let vh = window.innerHeight * 0.01;
         document.documentElement.style.setProperty('--vh', `${vh}px`);
+        document.getElementById('noscroll').addEventListener("touchstart", (e) => {
+            e.preventDefault();
+        });
     </script>
     <script src="script.js"></script>
     

@@ -15,49 +15,63 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Montserrat:wght@300&display=swap" rel="stylesheet">
     <style>
-        body{
-            height: 100vh;
-            height: calc(var(--vh, 1vh) * 100);
+        html, body {
+            margin: 0;
+            height: 100%;
+            overflow: hidden;
+            background: green;
+        }
+
+        #noscroll {
+            background-color: blue;
+            position: absolute;
+            overflow: hidden;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
         }
     </style>
 </head>
 <body>
-    <div class="start_menu" id="start-menu">
-            <input type="text" name="name" id="player_name_input" placeholder="your name here" class="player_name_input" required>
+    <div id="noscroll">
+        <div class="start_menu" id="start-menu">
+                <input type="text" name="name" id="player_name_input" placeholder="your name here" class="player_name_input" required>
+                <div class="control-buttons">
+                    <button id="start-button" type="button" class="control-button" onclick="start_game()">Start</button>
+                    <button id="exit-button" type="button" class="control-button" onclick="exit_game()">Exit</button>
+                </div>
+        </div>
+        <div class="parent"> 
+            <div class="div1">
+                <div class="player-name">hi <span id="name"></span>!</div>
+                <div class="player-score">Score&nbsp;:&nbsp;<span id="score">00</span> <button onclick="exit_game()" class="exit_button">X</button></div>
+            </div> 
+            <div class="div2">
+                <div id="letter" class="letter"></div>
+                <span style="margin: 10px;">for</span>
+            </div> 
+            <div class="div3">
+                <div class="guess-image" id="guess-image1">
+                    <img src="" alt="" class="image" id="image1">
+                </div>
+            </div> 
+            <div class="div4">
+                <div class="guess-image" id="guess-image2">
+                    <img src="" alt="" class="image" id="image2">
+                </div>
+            </div> 
+            <div class="div5">
+                <div class="guess-image" id="guess-image3">
+                    <img src="" alt="" class="image" id="image3">
+                </div>
+            </div> 
+        </div>
+        <div class="restart_menu" id="restart-menu">
             <div class="control-buttons">
-                <button id="start-button" type="button" class="control-button" onclick="start_game()">Start</button>
+                <button id="restart-button" type="button" class="control-button" onclick="restart_game()">Restart</button>
                 <button id="exit-button" type="button" class="control-button" onclick="exit_game()">Exit</button>
             </div>
-    </div>
-    <div class="parent"> 
-        <div class="div1">
-            <div class="player-name">hi <span id="name"></span>!</div>
-            <div class="player-score">Score&nbsp;:&nbsp;<span id="score">00</span> <button onclick="exit_game()" class="exit_button">X</button></div>
-        </div> 
-        <div class="div2">
-            <div id="letter" class="letter"></div>
-            <span style="margin: 10px;">for</span>
-        </div> 
-        <div class="div3">
-            <div class="guess-image" id="guess-image1">
-                <img src="" alt="" class="image" id="image1">
-            </div>
-        </div> 
-        <div class="div4">
-            <div class="guess-image" id="guess-image2">
-                <img src="" alt="" class="image" id="image2">
-            </div>
-        </div> 
-        <div class="div5">
-            <div class="guess-image" id="guess-image3">
-                <img src="" alt="" class="image" id="image3">
-            </div>
-        </div> 
-    </div>
-    <div class="restart_menu" id="restart-menu">
-        <div class="control-buttons">
-            <button id="restart-button" type="button" class="control-button" onclick="restart_game()">Restart</button>
-            <button id="exit-button" type="button" class="control-button" onclick="exit_game()">Exit</button>
         </div>
     </div>
     

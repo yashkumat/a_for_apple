@@ -14,6 +14,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com"> 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Montserrat:wght@300&display=swap" rel="stylesheet">
+    <style>
+        .parent{
+            height: 100vh;
+            height: calc(var(--vh, 1vh) * 100);
+        }
+    </style>
 </head>
 <body>
     <div class="start_menu" id="start-menu">
@@ -54,6 +60,12 @@
             <button id="exit-button" type="button" class="control-button" onclick="exit_game()">Exit</button>
         </div>
     </div>
+    
+    <script>
+        let vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+    </script>
     <script src="script.js"></script>
+    
 </body>
 </html>

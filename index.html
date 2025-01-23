@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name=apple-mobile-web-app-capable content=yes>
+    <meta name=apple-mobile-web-app-status-bar-style content=black>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="description" content="Learn Alphabets By Playing Game!">
+    <meta name="author" content="Yash Kumat">
+    <meta property="og:title" content="A for Apple" />
+    <meta property="og:url" content="https://yashkumat.github.io/a_for_apple/" />
+    <link rel="icon" href="alphabets.jpg">
+    <title>A for Apple</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&family=Comic:wght@300&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Comic Sans MS", "Poppins", sans-serif;
+        }
+
+        body {
+            font-family: "Comic Sans MS", "Poppins", sans-serif;
+            background: linear-gradient(135deg, #ffcfdf, #fefdca, #ff8b94);
+            height: 100vh;
+            width: 100vw;
+            padding: 1rem;
+        }
+
+        .parent {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .div1 {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff3cd;
+            border: 2px solid #ffeeba;
+            border-radius: 15px;
+            padding: 10px 20px;
+            box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .player-score {
+            display: flex;
+            align-items: center;
+        }
+
+        .player-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #4c4cff;
+        }
+
+        .player-score {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 25px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 5px 10px 5px 15px;
+            font-size: 1.2rem;
+            color: #4c4cff;
+            font-weight: bold;
+        }
+
+        .div2 {
+            font-size: 3rem;
+            color: #fff;
+            background: #6c5ce7;
+            border-radius: 20px;
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 0px;
+            text-shadow: 10px 10px 10px rgba(255, 255, 255, 0.5);
+        }
+
+        #image-container {
+            display: flex;
+            justify-content: space-between;
+            gap: .5rem;
+        }
+
+        .guess-image {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 2rem;
+            width: 30vw;
+            height: 30vw;
+        }
+
+        .guess-image .image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .guess-image:hover {
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.9);
+        }
+
+        .image:hover {
+            transform: scale(1.2);
+        }
+
+        @media only screen and (max-width: 600px) {
+            .guess-image {
+                width: 30vh;
+                height: 30vh;
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="parent">
+        <div class="div1">
+            <div class="player-name">hi :)</div>
+            <div class="player-score">Score&nbsp;:&nbsp;<span id="score">00</span></div>
+        </div>
+        <div class="div2">
+            <div id="letter" class="letter"> </div>
+        </div>
+        <p style="text-align: center;">for</p>
+        <div id="image-container">
+            <div class="guess-image" id="guess-image1">
+                <img src="" alt="" class="image" id="image1">
+            </div>
+            <div class="guess-image" id="guess-image2">
+                <img src="" alt="" class="image" id="image2">
+            </div>
+            <div class="guess-image" id="guess-image3">
+                <img src="" alt="" class="image" id="image3">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let alphabets = [
+            {
+                id: 0,
+                letter: 'A',
+                image: 'apple'
+            },
+            {
+                id: 1,
+                letter: 'B',
+                image: 'ball'
+            },
+            {
+                id: 2,
+                letter: 'C',
+                image: 'cat'
+            },
+            {
+                id: 3,
+                letter: 'D',
+                image: 'dog'
+            },
+            {
+                id: 4,
+                letter: 'E',
+                image: 'elephant'
+            },
+            {
+                id: 5,
+                letter: 'F',
+                image: 'fish'
+            },
+            {
+                id: 6,
+                letter: 'G',
+                image: 'goat'
+            },
+            {
+                id: 7,
+                letter: 'H',
+                image: 'hat'
+            },
+            {
+                id: 8,
+                letter: 'I',
+                image: 'icecream'
+            },
+            {
+                id: 9,
+                letter: 'J',
+                image: 'jeans'
+            },
+            {
+                id: 10,
+                letter: 'K',
+                image: 'kite'
+            },
+            {
+                id: 11,
+                letter: 'L',
+                image: 'lion'
+            },
+            {
+                id: 12,
+                letter: 'M',
+                image: 'monkey'
+            },
+            {
+                id: 13,
+                letter: 'N',
+                image: 'nest'
+            },
+            {
+                id: 14,
+                letter: 'O',
+                image: 'orange'
+            },
+            {
+                id: 15,
+                letter: 'P',
+                image: 'parrot'
+            },
+            {
+                id: 16,
+                letter: 'Q',
+                image: 'queen'
+            },
+            {
+                id: 17,
+                letter: 'R',
+                image: 'rat'
+            },
+            {
+                id: 18,
+                letter: 'S',
+                image: 'strawberry'
+            },
+            {
+                id: 19,
+                letter: 'T',
+                image: 'tea'
+            },
+            {
+                id: 20,
+                letter: 'U',
+                image: 'umbrella'
+            },
+            {
+                id: 21,
+                letter: 'V',
+                image: 'van'
+            },
+            {
+                id: 22,
+                letter: 'W',
+                image: 'watch'
+            },
+            {
+                id: 23,
+                letter: 'X',
+                image: 'xmasstree'
+            },
+            {
+                id: 24,
+                letter: 'Y',
+                image: 'yatch'
+            },
+            {
+                id: 25,
+                letter: 'Z',
+                image: 'zebra'
+            },
+        ]
+
+
+        let speakData = new SpeechSynthesisUtterance();
+
+        let image1 = document.getElementById('image1')
+        let image2 = document.getElementById('image2')
+        let image3 = document.getElementById('image3')
+        let letter_container = document.getElementById('letter')
+        let player_score = document.getElementById('score')
+        let player_name = document.getElementById('name')
+
+        let score = 0
+
+        let alphabet_object;
+
+        function newBoard() {
+
+            var arr = [];
+
+            while (arr.length < 3) {
+                var r = Math.floor(Math.random() * 26)
+                if (arr.indexOf(r) === -1) arr.push(r);
+            }
+
+            let images = document.getElementsByClassName('image')
+
+            for (let index = 0; index < images.length; index++) {
+                const element = images[index];
+                element.style.border = 'none'
+            }
+
+            alphabet_object = alphabets[arr[Math.floor(Math.random() * 3)]]
+
+            letter_container.innerHTML = `${alphabet_object['letter']}`;
+
+            image1.src = `${alphabets[arr[0]]['image']}.png`
+            image2.src = `${alphabets[arr[1]]['image']}.png`
+            image3.src = `${alphabets[arr[2]]['image']}.png`
+            image1.alt = `${alphabets[arr[0]]['id']}`
+            image2.alt = `${alphabets[arr[1]]['id']}`
+            image3.alt = `${alphabets[arr[2]]['id']}`
+        }
+
+        let images = document.getElementsByClassName('image')
+
+        for (let index = 0; index < images.length; index++) {
+            const element = images[index];
+            element.style.border = 'none'
+        }
+
+        for (let index = 0; index < images.length; index++) {
+            const element = images[index];
+            element.addEventListener('click', () => {
+
+                if (element.alt == alphabet_object['id']) {
+                    score++
+                    result(alphabet_object['id'])
+                    confetti()
+                } else {
+                    score--
+                    result()
+                    element.style.border = '1px solid red'
+                }
+            })
+        }
+
+        newBoard()
+        speakData.text = "Hello, Guess the word"
+        speechSynthesis.speak(speakData);
+
+        function result(flag) {
+
+            if (flag) {
+                let alphabet = `Correct, ${alphabets[flag]['letter']} for ${alphabets[flag]['image']}`
+                speakData.text = alphabet
+                player_score.style.color = 'green'
+                newBoard()
+            } else if (flag == 0) {
+                let alphabet = `Correct, ${alphabets[flag]['letter']} for ${alphabets[flag]['image']}`
+                speakData.text = alphabet
+                player_score.style.color = 'green'
+                newBoard()
+            } else {
+                speakData.text = "Try Again"
+                player_score.style.color = 'red'
+            }
+
+            document.getElementById('score').innerText = score
+
+            speechSynthesis.speak(speakData);
+        }
+
+    </script>
+
+</body>
+
+</html>

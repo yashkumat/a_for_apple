@@ -315,6 +315,13 @@
                 if (arr.indexOf(r) === -1) arr.push(r);
             }
 
+            let guess_images = document.getElementsByClassName('guess-image')
+
+            for (let index2 = 0; index2 < guess_images.length; index2++) {
+                const element2 = guess_images[index2];
+                element2.style.boxShadow = ''
+            }
+
             let images = document.getElementsByClassName('image')
 
             for (let index = 0; index < images.length; index++) {
